@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster"; // Import Toaster
 export const metadata: Metadata = {
   title: 'Recipe Generator',
   description: 'Generate recipes based on your ingredients using AI',
+  manifest: "/manifest.json", // Link to the manifest file
 };
 
 export default function RootLayout({
@@ -23,4 +24,3 @@ export default function RootLayout({
     </html>
   );
 }
-

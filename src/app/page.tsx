@@ -30,6 +30,7 @@ export default function Home() {
   const [generatedRecipe, setGeneratedRecipe] = useState<GenerateRecipeOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const apiURL = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:5000';
 
   const handleGenerateRecipe = async (formData: RecipeFormValues) => {
     setIsLoading(true);

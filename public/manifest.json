@@ -1,0 +1,27 @@
+{
+    "name": "RatAI tuille",
+    "short_name": "RatAItuille",
+    "theme_color": "#8936FF",
+    "background_color": "#333333",
+    "start_url": "/",
+    "id": "RatAItuille",
+    "display": "standalone",
+    "description": "A Progressive Web App built with Next.js",
+    "icons": [
+        {
+            "src": "../src/assets/images/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "../src/assets/images/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "../src/assets/images/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        }
+    ]
+}
