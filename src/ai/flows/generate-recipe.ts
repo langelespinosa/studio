@@ -32,7 +32,8 @@ export type GenerateRecipeOutput = z.infer<typeof GenerateRecipeOutputSchema>;
 
 export async function generateRecipe(input: GenerateRecipeInput): Promise<GenerateRecipeOutput> {
   try {
-    const response = await axios.post('https://ia-hackathon-backend.vercel.app/gen_recipe', input); //URL del servidor Flask
+    const response = await axios.post('https://ia-hackathon-backend.vercel.app/gen_recipe', input); //URL del servidor Flask de producción.
+    //const response = await axios.post('http://localhost:5000/gen_recipe', input); // URL del servidor Flask de desarrrollo.
     return response.data;
   } catch (error) {
     console.error('Error calling Flask server:', error);
