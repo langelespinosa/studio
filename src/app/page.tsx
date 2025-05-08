@@ -1,7 +1,7 @@
 
 'use client';
 import type { GenerateRecipeInput, GenerateRecipeOutput } from '@/ai/flows/generate-recipe';
-import { generateRecipe } from '@/ai/flows/generate-recipe.ts';
+import { generateRecipe } from '@/ai/flows/generate-recipe';
 import { RecipeForm, type RecipeFormValues } from '@/components/recipe-form';
 import { RecipeDisplay } from '@/components/recipe-display';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,6 +30,8 @@ export default function Home() {
   const [generatedRecipe, setGeneratedRecipe] = useState<GenerateRecipeOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<string[]>([]);
+  const [isPremium, setIsPremium] = useState(false); // Simulate premium status
   const apiURL = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:5000';
 
   const handleGenerateRecipe = async (formData: RecipeFormValues) => {
@@ -117,6 +119,50 @@ export default function Home() {
             </Card>
          </>
         )}
+
+        {/* Chat Section */}
+        {generatedRecipe && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-4">Chat about this recipe</h2>
+            <div className="border rounded-md p-4 h-40 overflow-y-auto mb-4">
+              {chatMessages.map((message, index) => (
+                <div key={index} className="mb-2">{message}</div>
+              ))}
+              {chatMessages.length === 0 && <div className="text-muted-foreground">Start the conversation!</div>}
+            </div>
+            {
+              (!isPremium && chatMessages.length >= 5) ? (
+              <p className="text-sm text-muted-foreground">You have reached the message limit for this recipe. Become premium for unlimited chat!</p>
+              ) : (
+                <div className="flex">
+                  <input
+                    type="text"
+                    placeholder="Type your message..."
+                    className="flex-grow border rounded-md p-2 mr-2"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim() !== '') {
+                      setChatMessages([...chatMessages, (e.target as HTMLInputElement).value]);
+                      (e.target as HTMLInputElement).value = '';
+                      }
+                    }}
+                  />
+                </div>
+              )
+            }
+          </div>
+        )}
+
+        {/* Premium Benefits Section on the Right */}
+        {/*<div className="w-1/4 bg-gray-200 p-4 text-center hidden md:block">
+          <h3 className="text-lg font-semibold mb-4">Why go Premium? 💎</h3>
+          <ul className="list-disc list-inside text-left mb-4">
+            <li>**Unlimited Chat** - Dive into endless conversations about your recipes.</li>
+            <li>**Ad-Free Experience** - Enjoy an uninterrupted culinary journey.</li>
+            <li>**Custom Food Selection** - Tailor recipes to your specific tastes.</li>
+            <li>**Support the Project** - Help fuel the future of AI-powered cooking.</li>
+          </ul>
+          <a href="#" className="text-blue-600 hover:underline">Discover the Benefits</a>
+        </div>*/}
 
         <footer className="mt-12 pt-6 border-t text-center text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Recipe Generator. Powered by AI.</p>
