@@ -32,6 +32,9 @@ export default function Home() {
   const [generatedRecipe, setGeneratedRecipe] = useState<GenerateRecipeOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<string[]>([]);
+  const [isPremium, setIsPremium] = useState(false); // Simulate premium status
+  const [chatEnabled, setChatEnabled] = useState(false);
 
   const handleGenerateRecipe = async (formData: RecipeFormValues) => {
     setIsLoading(true);
@@ -139,11 +142,43 @@ export default function Home() {
           </>
         )}
 
+        {/* Chat Section */}
+        {chatEnabled && generatedRecipe && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-bold mb-4">Chat about this recipe</h2>
+            <div className="border rounded-md p-4 h-40 overflow-y-auto mb-4">
+              {chatMessages.map((message, index) => (
+                <div key={index} className="mb-2">{message}</div>
+              ))}
+              {chatMessages.length === 0 && <div className="text-muted-foreground">Start the conversation!</div>}
+            </div>
+            {(!isPremium && chatMessages.length >= 5) ? (
+              <p className="text-sm text-muted-foreground">You have reached the message limit for this recipe. Become premium for unlimited chat!</p>
+            ) : (
+              <div className="flex">
+                <input
+                  type="text"
+                  placeholder="Type your message..."
+                  className="flex-grow border rounded-md p-2 mr-2"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const val = (e.target as HTMLInputElement).value.trim();
+                      if (val !== '') {
+                        handleChatMessage(val);
+                        (e.target as HTMLInputElement).value = '';
+                      }
+                    }
+                  }}
+                />
+
+              </div>
+            )}
+          </div>
+        )}
         <footer className="mt-12 pt-6 border-t text-center text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Recipe Generator. Powered by AI.</p>
         </footer>
       </div>
-    </>
-    
+    </>   
   );
 }
