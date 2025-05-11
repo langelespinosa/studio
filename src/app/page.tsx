@@ -1,6 +1,6 @@
 'use client';
 import type { GenerateRecipeInput, GenerateRecipeOutput } from '@/ai/flows/generate-recipe';
-import { generateRecipe } from '@/ai/flows/generate-recipe.ts';
+import { generateRecipe } from '@/ai/flows/generate-recipe';
 import { RecipeForm, type RecipeFormValues } from '@/components/recipe-form';
 import { RecipeDisplay } from '@/components/recipe-display';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +9,8 @@ import { useState, type CSSProperties } from 'react';
 import { AlertCircle, ChefHat } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { askAboutRecipe } from '@/ai/flows/ask-about-recipe';
+import Image from 'next/image'
+
 
 import Link from 'next/link';
 
@@ -92,20 +94,18 @@ export default function Home() {
   return (
     <>
       <style>{keyframes}</style>
-      <div className="container mx-auto max-w-3xl px-4 py-8 flex-grow">
+      <div className="container mx-auto max-w-3xl px-4 py-8 flex-grow ocean-background">
         <header className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-4 rounded-full bg-primary p-3 text-primary-foreground">
-            <ChefHat size={40} />
-          </div>
-          <h1 className="text-4xl font-bold text-primary">Recipe Generator</h1>
-          <p className="mt-2 text-lg text-muted-foreground">
-            Enter the ingredients you have, and let AI create a recipe for you!
+          <img src="./images/AI-xolotl.png" alt="AI-xolotl" width={110} className='rounded-full aspect-square object-cover'/>
+          <h1 className="text-4xl font-bold text-pink-400">Chef AI-xolotl</h1>
+          <p className="mt-2 text-lg text-white">
+            Ingrese los ingredientes con los que cuenta, y permita que el chef cree una receta para usted.
           </p>
         </header>
 
-        <Card className="mb-8 shadow-md">
+        <Card className="mb-8 shadow-md text-pink-700">
           <CardHeader>
-            <CardTitle className="text-2xl text-primary">Your Ingredients</CardTitle>
+            <CardTitle className="text-2xl text-pink-600">Ingredientes:</CardTitle>
           </CardHeader>
           <CardContent>
             <RecipeForm onSubmit={handleGenerateRecipe} isLoading={isLoading} />
@@ -115,8 +115,8 @@ export default function Home() {
         {isLoading && (
           <div className="flex flex-col items-center justify-center rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
             <div style={spinnerStyle} className="mb-4"></div>
-            <p className="text-lg font-medium text-primary">Generating your recipe...</p>
-            <p className="text-muted-foreground">Please wait a moment.</p>
+            <p className="text-lg font-medium text-primary">Generando receta...</p>
+            <p className="text-muted-foreground">Espere un momento.</p>
           </div>
         )}
 
@@ -133,7 +133,7 @@ export default function Home() {
             <Separator className="my-8" />
             <Card className="shadow-md">
               <CardHeader>
-                <CardTitle className="text-2xl text-primary">{generatedRecipe.recipeName}</CardTitle>
+                <CardTitle className="text-2xl text-pink-700">{generatedRecipe.recipeName}</CardTitle>
               </CardHeader>
               <CardContent>
                 <RecipeDisplay recipe={generatedRecipe} />
@@ -145,15 +145,15 @@ export default function Home() {
         {/* Chat Section */}
         {chatEnabled && generatedRecipe && (
           <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-4">Chat about this recipe</h2>
-            <div className="border rounded-md p-4 h-40 overflow-y-auto mb-4">
+            <h2 className="text-2xl font-bold mb-4 text-pink-300">Conversar sobre la receta</h2>
+            <div className="border rounded-md p-4 h-40 overflow-y-auto mb-4 text-pink-200">
               {chatMessages.map((message, index) => (
                 <div key={index} className="mb-2">{message}</div>
               ))}
-              {chatMessages.length === 0 && <div className="text-muted-foreground">Start the conversation!</div>}
+              {chatMessages.length === 0 && <div className="text-white">Iniciar conversación!</div>}
             </div>
             {(!isPremium && chatMessages.length >= 5) ? (
-              <p className="text-sm text-muted-foreground">You have reached the message limit for this recipe. Become premium for unlimited chat!</p>
+              <p className="text-sm text-white">Has alcanzado el límite de mensajes para esta receta. Cambiate a premium para conversaciones ilimitadas!</p>
             ) : (
               <div className="flex">
                 <input
@@ -175,12 +175,13 @@ export default function Home() {
             )}
           </div>
         )}
-
-        <footer className="mt-12 pt-6 border-t text-center text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Recipe Generator. Powered by AI.</p>
+        <footer className="mt-12 pt-6 border-t text-center text-white">
+          <p>&copy; {new Date().getFullYear()} AI-xolotl. Powered by Gemini. Created by 
+            <Link href="https://github.com/MartinOtamendiT" target="_blank" className="text-blue-400 hover:underline"> Martin Otamendi</Link> & 
+            <Link href="https://github.com/langelespinosa" target="_blank" className="text-blue-400 hover:underline"> Luis Ángel Espinosa</Link>.
+          </p>
         </footer>
       </div>
-    </>
-    
+    </>   
   );
 }

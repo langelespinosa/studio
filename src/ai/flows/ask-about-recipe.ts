@@ -26,7 +26,7 @@ export const askAboutRecipePrompt = ai.definePrompt({
   
   User's question: {{question}}
   
-  Answer the question in a helpful, engaging, and creative way. Feel free to include fun facts, comparisons, or vivid descriptions. Use your culinary knowledge and imagination to make the answer delightful and informative. If relevant, include nutritional insights or cooking tips that enhance the user's understanding and enjoyment of the recipe.`,
+  Answer the question in a helpful, engaging, and creative way. Feel free to include fun facts, comparisons, or vivid descriptions. Use your culinary knowledge and imagination to make the answer delightful and informative. If relevant, include nutritional insights or cooking tips that enhance the user's understanding and enjoyment of the recipe. Answer in the language of the question asked.`,
   
 });
 
@@ -34,12 +34,12 @@ export async function askAboutRecipe({
   recipe,
   question,
 }: {
-  recipe: { recipeName: string; instructions: string };
+  recipe: { recipeName: string; instructions: string[]; recommendations: string[] };
   question: string;
 }): Promise<string> {
   const { output } = await askAboutRecipePrompt({
     recipeName: recipe.recipeName,
-    instructions: recipe.instructions,
+    instructions: recipe.instructions.join('\n'),
     question,
   });
   return output?.answer || 'Sorry, I couldn’t find an answer.';
