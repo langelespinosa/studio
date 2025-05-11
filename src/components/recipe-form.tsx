@@ -96,9 +96,9 @@ export function RecipeForm({ onSubmit, isLoading }: RecipeFormProps) {
                   name={`ingredients.${index}.name`}
                   render={({ field }) => (
                     <FormItem className="flex-1">
-                      <FormLabel className={index !== 0 ? 'sr-only' : ''}>Ingredient</FormLabel>
+                      <FormLabel className={index !== 0 ? 'sr-only' : ''}>Ingrediente</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Flour" {...field} />
+                        <Input placeholder="e.g., Harina" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -109,9 +109,9 @@ export function RecipeForm({ onSubmit, isLoading }: RecipeFormProps) {
                   name={`ingredients.${index}.quantity`}
                   render={({ field }) => (
                     <FormItem className="flex-1">
-                       <FormLabel className={index !== 0 ? 'sr-only' : ''}>Approx. Quantity</FormLabel>
+                       <FormLabel className={index !== 0 ? 'sr-only' : ''}>Cantidad Aprox.</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., 2 cups" {...field} />
+                        <Input placeholder="e.g., 2 tazas" {...field} />
                       </FormControl>
                        <FormMessage />
                     </FormItem>
@@ -137,10 +137,10 @@ export function RecipeForm({ onSubmit, isLoading }: RecipeFormProps) {
             variant="outline"
             size="sm"
             onClick={handleAddIngredient}
-            className="mt-2 border-dashed border-primary text-primary hover:bg-primary/10"
+            className="mt-2 border-dashed border-primary text-pink-700 hover:bg-primary/50"
           >
             <Plus className="mr-2 h-4 w-4" />
-            Add Ingredient
+            Añadir Ingrediente
           </Button>
 
         <Separator className="my-6" />
@@ -196,14 +196,14 @@ export function RecipeForm({ onSubmit, isLoading }: RecipeFormProps) {
          </Card>
 
 
-          <Button type="submit" disabled={isLoading} size="lg" className="w-full btn-accent">
+          <Button type="submit" disabled={isLoading} size="lg" className="w-full btn-accent bg-orange-600 hover:bg-orange-500 text-white px-8 py-2 rounded-md">
              {isLoading ? (
                 <>
                  <span style={spinnerStyle}></span>
-                 Generating...
+                 Generando...
                 </>
              ) : (
-                 'Generate Recipe'
+                 'Generar Receta'
              )}
           </Button>
            {/* Display global form error if ingredients array is empty after submission */}

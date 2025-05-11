@@ -64,13 +64,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
-        <h3 className="text-2xl font-bold text-center">Login</h3>
+    <div className="flex items-center justify-center min-h-screen ocean-background">
+      <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg flex flex-col items-center">
+        <h3 className="text-2xl font-bold text-center text-pink-600">¡Hola de nuevo!</h3>
+        <p>Inicie sesión para tener una mejor experiencia</p>
+        <img src="./images/Axolotl_swimming.gif" alt="AI-xolotl" width={100}/>
         <form onSubmit={handleSubmit}>
           <div className="mt-4">
             <div>
-              <label className="block" htmlFor="email">Email</label>
+              <label className="block" htmlFor="email">Email:</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -82,7 +84,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="mt-4">
-              <label className="block" htmlFor="password">Password</label>
+              <label className="block" htmlFor="password">Password:</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -96,9 +98,9 @@ export default function LoginPage() {
             <div className="flex items-baseline justify-between">
               <button
                 type="submit"
-                className="w-full flex justify-center px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
+                className="w-full flex justify-center px-6 py-2 mt-4 bg-orange-600 hover:bg-orange-500 text-white rounded-md"
               >
-                Login
+                Acceder
               </button>
             </div>
           </div>

@@ -4,6 +4,20 @@
 
 body {
   font-family: var(--font-geist-sans), sans-serif;
+  background: linear-gradient(
+    #0093AE,#006686,#001724
+  );
+}
+
+
+.navbar-background {
+  background: #DE8F72;
+}
+
+.ocean-background {
+  background: linear-gradient(
+    #0093AE,#006686,#001724
+  );
 }
 
 @layer base {

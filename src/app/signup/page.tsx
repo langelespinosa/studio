@@ -73,9 +73,13 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center ocean-background">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-            <h1 className="text-2xl font-bold mb-6 text-center">Sign Up</h1>
+            <h1 className="text-2xl font-bold mb-6 text-center text-pink-600">Registro</h1>
+            <p className="text-center">Complete el formulario para registrarse</p>
+            <div className="flex flex-col items-center">
+              <img src="./images/Axolotl_cooking.gif" alt="AI-xolotl" width={110} className='rounded-full aspect-square object-cover'/>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -127,9 +131,9 @@ export default function SignupPage() {
                 </div>
                 <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-orange-600 hover:bg-orange-500 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
-                    Sign Up
+                    Registarse
                 </button>
             </form>
         </div>
